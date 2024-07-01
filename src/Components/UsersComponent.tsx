@@ -16,10 +16,6 @@ const UsersComponent: FC = () => {
         });
     }, []);
 
-    useEffect(() => {
-
-    }, []);
-
     const showPostsOfUser = (id: number) => {
         getPostsOfUserById(id).then(res => setPosts([...res.posts]));
         console.log(id);
