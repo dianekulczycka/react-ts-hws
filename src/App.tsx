@@ -4,10 +4,10 @@ import {useToggle} from "./Hooks/useToggle";
 import {usePrevious} from "./Hooks/usePrevious";
 
 const App: FC = () => {
-    const [isBtnToggled, toggle] = useToggle(false);
+    const [isBtnToggled, setIsBtnToggled] = useToggle(false);
     return (
         <>
-            <button onClick={toggle}>
+            <button onClick={setIsBtnToggled}>
                 {isBtnToggled ? "true" : "false"}
             </button>
         </>
