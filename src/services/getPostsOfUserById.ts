@@ -1,9 +1,8 @@
 import {axiosInstance} from "./baseRequest";
 
 const getPostsOfUserById = async (id: number) => {
-    return await axiosInstance.get("/users/" + id + "/posts").then((res) => res.data)
+    const res = await axiosInstance.get(`users/${id}/posts`);
+    return res.data;
 };
 
 export {getPostsOfUserById};
-
-

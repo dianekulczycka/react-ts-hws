@@ -1,26 +1,21 @@
-import React, {FC} from 'react';
+import React, {Component} from 'react';
+import {IUser} from "../interfaces/IUser";
 
-interface IProps {
-    id: number,
-    name: string,
-    age: number,
-    birthDate: string,
+type MyProps = IUser & { showPostsOfUser: (id: number) => void };
 
-    showPostsOfUser: (id: number) => void
-}
-
-const UserComponent: FC<IProps> = ({id, name, age, birthDate, showPostsOfUser}) => {
+class UserComponent extends Component<MyProps, {}> {
+    render() {
         return (
-            <li>
-                <h3 className={id.toString()}> {name}, {age} y.o. </h3>
-                <p className={id.toString()}> Birthday: {birthDate} </p>
+            <>
+                <li>
+                    <h3> {this.props.name}, {this.props.age} y.o. </h3>
+                </li>
                 <button onClick={() => {
-                    showPostsOfUser(id)
-                }}> Show Posts of {name} </button>
-            </li>
+                    this.props.showPostsOfUser(this.props.id)
+                }}> Show Posts of {this.props.name} </button>
+            </>
         );
     }
-;
-
+}
 
 export {UserComponent};
