@@ -1,46 +1,62 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {Component} from 'react';
+import {getUsers} from "../services/getUsers";
+import {getPostsOfUserById} from "../services/getPostsOfUserById";
 import {UserComponent} from "./UserComponent";
 import {PostsComponent} from "./PostsComponent";
-import {getUsers} from "../services/getUsers";
-import {IUser} from "../interfaces/IUser";
-import {IPost} from "../interfaces/IPost";
-import {getPostsOfUserById} from "../services/getPostsOfUserById";
 
-const UsersComponent: FC = () => {
-    const [users, setUsers] = useState<IUser[]>([]);
-    const [posts, setPosts] = useState<IPost[]>([]);
+interface MyState {
+    users: {
+        id: number,
+        firstName: string,
+        age: number
+    }[],
+    posts: {
+        id: number,
+        title: string
+    }[]
+}
 
-    useEffect(() => {
-        getUsers().then(({users}) => {
-            setUsers([...users]);
-        });
-    }, []);
+class UsersComponent extends Component<{}, MyState> {
 
-    const showPostsOfUser = (id: number) => {
-        getPostsOfUserById(id).then(res => setPosts([...res.posts]));
-        console.log(id);
+    state: MyState = {
+        users: [],
+        posts: []
     }
-    console.log(posts);
 
-    return (
-        <>
-            <ul>
-                {
-                    users.map(({id, age, firstName, birthDate}) => (
-                        <UserComponent
-                            key={id}
-                            id={id}
-                            name={firstName}
-                            age={age}
-                            birthDate={birthDate}
-                            showPostsOfUser={showPostsOfUser}
-                        />
-                    ))
-                }
-            </ul>
-            <PostsComponent posts={posts}/>
-        </>
-    );
-};
+    showPostsOfUser = (id: number) => {
+        console.log("showPostsOfUser worked");
+        getPostsOfUserById(id).then(res => this.setState(res));
+    }
+
+    componentDidMount() {
+        console.log("component mounted");
+        getUsers().then(res => this.setState(res));
+    }
+
+    render() {
+        return (
+            <>
+                <button onClick={() => {
+                    console.log(this.state)
+                }}> log state to console
+                </button>
+                <ul>
+                    {
+                        this.state.users.map((user: any) => (
+                            <UserComponent
+                                key={user.id}
+                                id={user.id}
+                                name={user.firstName}
+                                age={user.age}
+                                showPostsOfUser={this.showPostsOfUser}
+                            />
+                        ))
+                    }
+                </ul>
+                <PostsComponent posts={this.state.posts}/>
+            </>
+        );
+    }
+}
 
 export {UsersComponent};

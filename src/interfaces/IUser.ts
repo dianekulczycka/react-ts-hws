@@ -1,6 +1,5 @@
 export interface IUser {
     id: number;
-    firstName: string;
+    name: string;
     age: number;
-    birthDate: string;
 }

@@ -1,12 +1,12 @@
-import React, {FC} from 'react';
+import React, {Component} from 'react';
 import {IPost} from "../interfaces/IPost";
 
-const PostComponent: FC<IPost> = ({id, title}) => {
-    return (
-        <>
-            <li key={id}> {title} </li>
-        </>
-    );
-};
+class PostComponent extends Component<IPost, {}> {
+    render() {
+        return (
+            <li key={this.props.id}> {this.props.id}. {this.props.title} </li>
+        );
+    }
+}
 
 export {PostComponent};
