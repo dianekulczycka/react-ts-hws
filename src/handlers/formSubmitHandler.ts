@@ -12,7 +12,7 @@ let formSubmitHandler = async (data: IFormInfo) => {
             id: 1,
             title: data.title,
             body: data.body,
-            userId: 1,
+            userId: data.userId,
         }),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',

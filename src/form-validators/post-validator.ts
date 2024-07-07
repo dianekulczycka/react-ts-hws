@@ -2,44 +2,43 @@ import Joi from "joi";
 
 const postValidator = Joi.object(
     {
+        userId: Joi.number().min(1).max(30).required().messages(
+            {
+                "number.min": "min user ID is 1",
+                "number.max": "max user ID is 30",
+            }),
         title: Joi.string().pattern(/^.{3,62}$/)
             .required()
+
+            // somehow it ignores the following messages and logs
+            // "fails to match the required pattern"
+            // to any error, i tried to fix it using stackoverflow answers but
+            // i didnt really understand the solution so i didnt implement it here ))
+
+            .messages({
+                "string.empty": "Post title cannot be empty!",
+                "string.min": "Post title should be at least 2 symbols",
+                "string.max": "Post title can not be over 63 symbols",
+            })
             .error(ers => {
-
-                // somehow throws " fails to match the required pattern " for everything
-                // except string.empty. might want to research if i have some spare time next week
-
                 ers.forEach(e => {
-                    switch (e.code) {
-                        case "string.empty":
-                            e.message = "Post title cannot be empty!";
-                            break;
-                        case "string.min":
-                            e.message = "Post title should be at least 2 symbols";
-                            break;
-                        case "string.max":
-                            e.message = "Post title can not be over 63 symbols";
-                    }
+                    console.log(e);
                 })
                 return ers;
             }),
-        body: Joi.string().pattern(/^.{6,126}$/)
+        body: Joi.string().pattern(/^.{6,127}$/)
             .required()
+            .messages({
+                "string.empty": "Post body cannot be empty!",
+                "string.min": "Post body should be at least 6 symbols",
+                "string.max": "Post body can not be over 127 symbols",
+            })
             .error(ers => {
                 ers.forEach(e => {
-                    switch (e.code) {
-                        case "string.empty":
-                            e.message = "Post body cannot be empty!";
-                            break;
-                        case "string.min":
-                            e.message = "Post body should be at least 6 symbols";
-                            break;
-                        case "string.max":
-                            e.message = "Post body can not be over 163 symbols";
-                    }
+                    console.log(e);
                 })
                 return ers;
-            })
+            }),
     }
 )
 
