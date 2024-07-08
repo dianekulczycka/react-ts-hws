@@ -2,10 +2,10 @@ import Joi from "joi";
 
 const postValidator = Joi.object(
     {
-        userId: Joi.number().min(1).max(30).required().messages(
+        userId: Joi.number().min(1).max(10).required().messages(
             {
                 "number.min": "min user ID is 1",
-                "number.max": "max user ID is 30",
+                "number.max": "max user ID is 10",
             }),
         title: Joi.string().pattern(/^.{3,62}$/)
             .required()
