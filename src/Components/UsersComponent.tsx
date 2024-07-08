@@ -3,6 +3,8 @@ import {getUsers} from "../services/getUsers";
 import {getPostsOfUserById} from "../services/getPostsOfUserById";
 import {UserComponent} from "./UserComponent";
 import {PostsComponent} from "./PostsComponent";
+import {IPost} from "../interfaces/IPost";
+import {IUser} from "../interfaces/IUser";
 
 interface MyState {
     users: {
@@ -25,12 +27,20 @@ class UsersComponent extends Component<{}, MyState> {
 
     showPostsOfUser = (id: number) => {
         console.log("showPostsOfUser worked");
-        getPostsOfUserById(id).then(res => this.setState(res));
+        getPostsOfUserById(id)
+            .then((posts: IPost[]) => {
+                const myPosts = posts.map(({id, title}) => ({id, title}));
+                this.setState({posts: [...myPosts]});
+            })
     }
 
     componentDidMount() {
         console.log("component mounted");
-        getUsers().then(res => this.setState(res));
+        getUsers()
+            .then((users: IUser[]) => {
+                const myUsers = users.map(({id, firstName, age}) => ({id, firstName, age}));
+                this.setState({users: [...myUsers]});
+            })
     }
 
     render() {
@@ -46,7 +56,7 @@ class UsersComponent extends Component<{}, MyState> {
                             <UserComponent
                                 key={user.id}
                                 id={user.id}
-                                name={user.firstName}
+                                firstName={user.firstName}
                                 age={user.age}
                                 showPostsOfUser={this.showPostsOfUser}
                             />
