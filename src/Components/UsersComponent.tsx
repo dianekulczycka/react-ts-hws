@@ -11,13 +11,14 @@ const UsersComponent: FC = () => {
     const [posts, setPosts] = useState<IPost[]>([]);
 
     useEffect(() => {
-        getUsers().then(({users}) => {
+        getUsers().then((users: IUser[]) => {
+            console.log(users)
             setUsers([...users]);
         });
     }, []);
 
     const showPostsOfUser = (id: number) => {
-        getPostsOfUserById(id).then(res => setPosts([...res.posts]));
+        getPostsOfUserById(id).then((posts: IPost[]) => setPosts([...posts]));
         console.log(id);
     }
     console.log(posts);
