@@ -1,6 +1,6 @@
 import {Endpoint} from "../interfaces/IEndpoint";
 
-const baseURL = "https://jsonplaceholder.typicode.com/";
+const baseURL = "https://jsonplaceholder.typicode.com";
 
 const endpoints: Endpoint = {
     users: "/users",

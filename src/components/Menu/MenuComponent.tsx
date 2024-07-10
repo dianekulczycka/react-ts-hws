@@ -5,7 +5,7 @@ import {menuData} from "./menu.data";
 const MenuComponent = () => {
     return (
         <ul>
-            {menuData.map((el, index) => <MenuItemComponent index={index} el={el} />)}
+            {menuData.map((el, index) => <MenuItemComponent key={index} index={index} el={el} />)}
         </ul>
     );
 };

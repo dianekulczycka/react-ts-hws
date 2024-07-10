@@ -5,7 +5,8 @@ interface IProps {
     index: number,
     el: string
 }
-const MenuItemComponent: FC<IProps> = ({index, el}) => {
+
+const MenuItemComponent: FC<IProps> = ({el, index}) => {
     return (
         <li key={index}>
             <Link key={index} to={el.toString()}> {el} </Link>

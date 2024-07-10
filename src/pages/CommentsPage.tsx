@@ -15,7 +15,7 @@ const CommentsPage: FC = () => {
         <ul>
             {
                 comments.map(({postId, id, name, email, body}) => (
-                    <CommentComponent postId={postId} id={id} name={name} email={email} body={body}/>))
+                    <CommentComponent key={id} postId={postId} id={id} name={name} email={email} body={body}/>))
             }
         </ul>
     );
