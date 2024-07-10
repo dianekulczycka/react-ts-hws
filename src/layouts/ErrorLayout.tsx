@@ -5,7 +5,7 @@ const ErrorLayout: FC = () => {
     return (
         <div>
             <h1> Sorry! Not found </h1>
-            <Link to={"/users"}> Get back to main page </Link>
+            <Link to={"/"}> Get back to main page </Link>
         </div>
     );
 };
