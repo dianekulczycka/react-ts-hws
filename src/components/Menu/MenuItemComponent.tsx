@@ -8,7 +8,7 @@ interface IProps {
 
 const MenuItemComponent: FC<IProps> = ({el, index}) => {
     return (
-        <li key={index}>
+        <li key={index} className="menuItem">
             <Link key={index} to={el.toString()}> {el} </Link>
         </li>
     );

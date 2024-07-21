@@ -1,12 +1,12 @@
-li {
+li, div {
     display: block;
-    width: 25%;
+    width: 80%;
     border: 1px black solid;
     margin: 0.5em;
     padding: 0.5em;
-    font-size: 1.5em;
 }
 
 .menuItem {
     background-color: lightblue;
 }
+
